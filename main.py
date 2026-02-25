@@ -5,7 +5,7 @@ from operator import *
 def main(): 
     domande_lista=[]
     giocatori_lista=[]
-    file="Lab01-main/domande.txt"
+    file="Lab01/domande.txt"
     domande_lista=crealistadomande(file, domande_lista)
     livello_massimo=trovalivellomassimo(domande_lista)
     domande_per_livello=dividiperlivello(domande_lista, livello_massimo)
@@ -23,7 +23,7 @@ def main():
 
     giocatore=Giocatore(nickname, punteggio)
     giocatori_lista.append(giocatore)
-    aggiungipunteggio("Lab01-main/punti.txt", giocatore)
+    aggiungipunteggio("Lab01/punti.txt", giocatore)
 
 
 def crealistadomande(file,domande_lista):
