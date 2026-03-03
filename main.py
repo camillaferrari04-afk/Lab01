@@ -1,18 +1,18 @@
 from domande import Domanda
 from giocatori import Giocatore
 from random import *
-from operator import *
+
 def main(): 
     domande_lista=[]
     giocatori_lista=[]
-    file="Lab01/domande.txt"
+    file="domande.txt"
     domande_lista=crealistadomande(file, domande_lista)
     livello_massimo=trovalivellomassimo(domande_lista)
     domande_per_livello=dividiperlivello(domande_lista, livello_massimo)
 
     for i in range(0,livello_massimo+1):
         risposta=stampadomanda(domande_per_livello[i])
-        if risposta==False:
+        if not risposta:
             punteggio=i
             break
         print("Risposta corretta! \n")
@@ -23,7 +23,7 @@ def main():
 
     giocatore=Giocatore(nickname, punteggio)
     giocatori_lista.append(giocatore)
-    aggiungipunteggio("Lab01/punti.txt", giocatore)
+    aggiungipunteggio("punti.txt", giocatore)
 
 
 def crealistadomande(file,domande_lista):
@@ -86,7 +86,7 @@ def aggiungipunteggio(file, giocatore):
     try:
         infile=open(file,'r', encoding='utf-8')
         for line in infile:
-            riga=line.split(" ")
+            riga=line.rstrip().split(" ")
             classifica.append([riga[0],riga[1]])
         infile.close()   
     except FileNotFoundError:
@@ -96,7 +96,6 @@ def aggiungipunteggio(file, giocatore):
         if int(classifica[i][1])<=giocatore.punteggio:
             classifica.insert(i, [giocatore.name, giocatore.punteggio])
             break
-
 
     try:
         infile=open(file,'w', encoding='utf-8')
